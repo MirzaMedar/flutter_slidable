@@ -27,6 +27,8 @@ class Slidable extends StatefulWidget {
     this.direction = Axis.horizontal,
     this.dragStartBehavior = DragStartBehavior.down,
     this.useTextDirection = true,
+    this.isOpen = false,
+    this.openFraction = .3,
     required this.child,
   }) : super(key: key);
 
@@ -36,6 +38,9 @@ class Slidable extends StatefulWidget {
   ///
   /// Defaults to true.
   final bool enabled;
+
+  final bool isOpen;
+  final double openFraction;
 
   /// Specifies to close this [Slidable] after the closest [Scrollable]'s
   /// position changed.
@@ -151,6 +156,12 @@ class _SlidableState extends State<Slidable>
     super.didUpdateWidget(oldWidget);
     updateIsLeftToRight();
     updateController();
+
+    if (widget.isOpen) {
+      controller.openTo(widget.openFraction).then((value) => null);
+    } else {
+      controller.close();
+    }
   }
 
   @override
