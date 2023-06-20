@@ -27,8 +27,10 @@ class Slidable extends StatefulWidget {
     this.direction = Axis.horizontal,
     this.dragStartBehavior = DragStartBehavior.down,
     this.useTextDirection = true,
-    this.isOpen = false,
-    this.openFraction = .3,
+    this.isLeftOpen = false,
+    this.isRightOpen = false,
+    this.openLeftFraction = .3,
+    this.openRightFraction = .3,
     required this.child,
   }) : super(key: key);
 
@@ -39,8 +41,10 @@ class Slidable extends StatefulWidget {
   /// Defaults to true.
   final bool enabled;
 
-  final bool isOpen;
-  final double openFraction;
+  final bool isLeftOpen;
+  final double openLeftFraction;
+  final bool isRightOpen;
+  final double openRightFraction;
 
   /// Specifies to close this [Slidable] after the closest [Scrollable]'s
   /// position changed.
@@ -157,8 +161,16 @@ class _SlidableState extends State<Slidable>
     updateIsLeftToRight();
     updateController();
 
-    if (widget.isOpen) {
-      controller.openTo(widget.openFraction).then((value) => null);
+    if (widget.isLeftOpen) {
+      controller
+          .openStartActionPane(duration: Duration(milliseconds: 500))
+          .then((value) => null);
+    } else if (widget.isRightOpen) {
+      controller.openEndActionPane(
+        duration: Duration(
+          milliseconds: 500,
+        ),
+      );
     } else {
       controller.close();
     }

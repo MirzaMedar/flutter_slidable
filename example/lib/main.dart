@@ -36,8 +36,8 @@ class _MyAppState extends State<MyApp> {
                 shrinkWrap: true,
                 children: [
                   Slidable(
-                    isOpen: isOpen,
-                    openFraction: .3,
+                    isLeftOpen: isOpen,
+                    openLeftFraction: .3,
                     // Specify a key if the Slidable is dismissible.
                     key: const ValueKey(0),
 
@@ -97,8 +97,8 @@ class _MyAppState extends State<MyApp> {
                     child: const ListTile(title: Text('Slide me')),
                   ),
                   Slidable(
-                    isOpen: isOpen,
-                    openFraction: .3,
+                    isRightOpen: isOpen,
+                    openRightFraction: .3,
                     // Specify a key if the Slidable is dismissible.
                     key: const ValueKey(1),
 
